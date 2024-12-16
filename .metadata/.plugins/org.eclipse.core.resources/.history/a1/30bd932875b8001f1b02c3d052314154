@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<f:view>
+	<h:head>
+		<title>GIDARI BATEN BIDAI GUZTIAK ERAKUTSI</title>
+	</h:head>
+	<h:body>
+		<h:form>
+			<h1>Aukeratu erabiltzaile bat</h1>
+			<table>
+				<tr>
+					<td><h:outputLabel value="Usuario:" for="username" /></td>
+					<td><h:selectOneMenu id="username"
+							value="#{gidaribidaiBean.selectedUsername}">
+							<f:selectItem itemLabel="Seleccionar usuario" />
+							<f:selectItems value="#{gidaribidaiBean.usernames}" />
+							<f:ajax execute="@this" render="output" />
+						</h:selectOneMenu></td>
+				</tr>
+				<tr>
+					<td><h:commandButton
+							value="GIDARI BATEN BIDAI GUZTIAK ERAKUTSI"
+							action="#{gidaribidaiBean.bla}" /></td>
+				</tr>
+
+			</table>
+		</h:form>
+	</h:body>
+</f:view>
+</html>

@@ -1,0 +1,32 @@
+package managedBeans;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import businessLogic.BLFacade;
+import businessLogic.FacadeBean;
+
+@ManagedBean(name = "loginBean")
+@SessionScoped
+public class LoginBean {
+
+	private String email;
+	private String password;
+	private BLFacade facadeBL;
+
+	public LoginBean() {
+		facadeBL = FacadeBean.getBusinessLogic(); // Obtener la instancia de BLFacade
+	}
+
+	public String login() {
+		// Verifica si las credenciales son correctas
+		if (facadeBL.isLoginValid(email, password)) {
+			// Si el login es válido, redirigir a la página correspondiente
+			return "driver.xhtml"; // O "traveler.xhtml" dependiendo del tipo de usuario
+		} else {
+			// Si las credenciales no son válidas, mostrar un mensaje de error
+			return "login.xhtml"; // Redirigir a la página de login
+		}
+	}
+
+	// Getters y setters
+}

@@ -1,0 +1,13 @@
+package managedBeans;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+
+@ManagedBean(name = "driverBean")
+@SessionScoped
+public class DriverBean {
+
+	public String createRide() {
+		return "createride.xhtml";
+	}
+}

@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<f:view>
+	<h:head>
+		<title>Viajes del conductor</title>
+	</h:head>
+	<h:body>
+		<h:form>
+			<h1>Viajes de #{gidaribidaiBean.selectedUsername}</h1>
+
+			<!-- Tabla con los viajes -->
+			<h:dataTable value="#{gidaribidaiBean.rides}" var="ride" border="1">
+				<!-- Columna: Origen -->
+				<h:column>
+					<f:facet name="header">Origen</f:facet>
+					<h:outputText value="#{ride.from}" />
+				</h:column>
+
+				<!-- Columna: Destino -->
+				<h:column>
+					<f:facet name="header">Destino</f:facet>
+					<h:outputText value="#{ride.to}" />
+				</h:column>
+
+				<!-- Columna: Fecha -->
+				<h:column>
+					<f:facet name="header">Fecha</f:facet>
+					<h:outputText value="#{ride.date}" />
+				</h:column>
+
+				<!-- Columna: Sitios disponibles -->
+				<h:column>
+					<f:facet name="header">Sitios</f:facet>
+					<h:outputText value="#{ride.nPlaces}" />
+				</h:column>
+
+				<!-- Columna: Precio -->
+				<h:column>
+					<f:facet name="header">Precio</f:facet>
+					<h:outputText value="#{ride.price}" />
+				</h:column>
+			</h:dataTable>
+
+			<!-- Botón para volver -->
+			<h:commandButton value="Volver" action="gidaribidai.xhtml" />
+		</h:form>
+	</h:body>
+</f:view>

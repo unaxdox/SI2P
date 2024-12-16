@@ -1,0 +1,46 @@
+------------------------------------------------------------------------------------------------------------------------
+
+[2024-12-04 11:44:19 #1 store] 
+Database 'C:\Windows\System32\src\main\resources\rides.temp' is opened by 9716@LAPTOP-ITGLNV29
+
+[2024-12-04 11:44:19 #2 type.registry] 
+New type domain.Driver
+
+[2024-12-04 11:44:19 #3 type] 
+Type domain.Driver is not enhanced.
+
+[2024-12-04 11:44:19 #4 type.registry] 
+New type domain.Ride
+
+[2024-12-04 11:44:19 #5 type] 
+Type domain.Ride is not enhanced.
+
+[2024-12-04 11:44:19 #6 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
+[2024-12-04 11:44:19 #7 type.registry] 
+New type java.util.Vector<domain.Ride>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2024-12-04 11:48:03 #1 store] 
+Database 'C:\Windows\System32\src\main\resources\rides.temp' is opened by 24304@LAPTOP-ITGLNV29
+
+[2024-12-04 11:48:03 #2 type.registry] 
+New type domain.Driver
+
+[2024-12-04 11:48:03 #3 type] 
+Type domain.Driver is not enhanced.
+
+[2024-12-04 11:48:03 #4 type.registry] 
+New type domain.Ride
+
+[2024-12-04 11:48:04 #5 type] 
+Type domain.Ride is not enhanced.
+
+[2024-12-04 11:48:04 #6 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
+[2024-12-04 11:48:04 #7 type.registry] 
+New type java.util.Vector<domain.Ride>
+

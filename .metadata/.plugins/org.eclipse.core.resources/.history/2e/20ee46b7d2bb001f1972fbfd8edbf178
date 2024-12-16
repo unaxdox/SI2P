@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<f:view>
+	<h:head>
+		<title>GIDARI BATEN BIDAI GUZTIAK ERAKUTSI</title>
+	</h:head>
+	<h:body>
+		<h:form>
+			<!-- SelectOneMenu para elegir el username de los conductores -->
+			<h:outputLabel for="driver" value="Gidari bat aukeratu:" />
+			<h:selectOneMenu id="driver"
+				value="#{gidaribidaiBean.selectedUsername}">
+				<f:selectItem itemLabel="-- Selecciona un conductor --" itemValue="" />
+				<f:selectItems value="#{gidaribidaiBean.driverUsernames}" />
+			</h:selectOneMenu>
+
+			<!-- Botón de cerrar que redirige al index -->
+			<h:commandButton value="Cerrar"
+				action="index.xhtml?faces-redirect=true" />
+		</h:form>
+	</h:body>
+</f:view>

@@ -1,0 +1,153 @@
+package businessLogic;
+
+import java.util.Date;
+import java.util.List;
+
+import javax.jws.WebMethod;
+import javax.jws.WebService;
+
+import dataAccess.DataAccess;
+import domain.Ride;
+import exceptions.DriverAlreadyExistsException;
+import exceptions.RideAlreadyExistException;
+import exceptions.RideMustBeLaterThanTodayException;
+
+@WebService(endpointInterface = "businessLogic.BLFacade")
+public class BLFacadeImplementation implements BLFacade {
+	private DataAccess dbManager;
+
+	// Constructor por defecto
+	public BLFacadeImplementation() {
+		System.out.println("Creating BLFacadeImplementation instance");
+		dbManager = new DataAccess(); // Abre conexión con la base de datos
+	}
+
+	// Constructor con DataAccess (para ser usado cuando se pase una instancia
+	// personalizada de DataAccess)
+	public BLFacadeImplementation(DataAccess da) {
+		System.out.println("Creating BLFacadeImplementation instance with DataAccess parameter");
+		dbManager = da;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@WebMethod
+	public List<String> getDepartCities() {
+		dbManager.open();
+		List<String> departLocations = dbManager.getDepartCities();
+		dbManager.close();
+		return departLocations;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@WebMethod
+	public List<String> getDestinationCities(String from) {
+		dbManager.open();
+		List<String> targetCities = dbManager.getArrivalCities(from);
+		dbManager.close();
+		return targetCities;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@WebMethod
+	public Ride createRide(String from, String to, Date date, int nPlaces, float price, String driverEmail)
+			throws RideMustBeLaterThanTodayException, RideAlreadyExistException {
+
+		dbManager.open();
+		Ride ride = dbManager.createRide(from, to, date, nPlaces, price, driverEmail);
+		dbManager.close();
+		return ride;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@WebMethod
+	public List<Ride> getRides(String from, String to, Date date) {
+		dbManager.open();
+		List<Ride> rides = dbManager.getRides(from, to, date);
+		dbManager.close();
+		return rides;
+	}
+
+	/**
+	 * Método para registrar un nuevo Driver.
+	 */
+	@WebMethod
+	public boolean createDriver(String email, String name, String password) throws DriverAlreadyExistsException {
+		dbManager.open();
+
+		try {
+			// Verifica si el driver ya existe
+			if (dbManager.isRegistered(email)) {
+				throw new DriverAlreadyExistsException("El correo del Driver ya está registrado.");
+			}
+
+			// Si no existe, crea el nuevo driver
+			boolean success = dbManager.createDriver(email, name, password);
+			if (!success) {
+				throw new DriverAlreadyExistsException("Error al crear el Driver.");
+			}
+			return true; // Retorna true si el proceso fue exitoso
+		} finally {
+			dbManager.close(); // Asegura que siempre se cierre el manager
+		}
+	}
+
+	/**
+	 * Método para registrar un nuevo Traveler.
+	 */
+	@WebMethod
+	public void createTraveler(String email, String name, String password) throws DriverAlreadyExistsException {
+		dbManager.open();
+
+		// Verifica si el traveler ya existe
+		if (dbManager.isRegistered(email)) {
+			dbManager.close();
+			throw new DriverAlreadyExistsException("El correo del Traveler ya está registrado.");
+		}
+
+		// Si no existe, crea el nuevo traveler
+		boolean success = dbManager.createTraveler(email, name, password);
+		dbManager.close();
+		if (!success) {
+			throw new DriverAlreadyExistsException("Error al crear el Traveler.");
+		}
+	}
+
+	@WebMethod
+	public boolean isLoginValid(String email, String password) {
+		return dbManager.isLoginValid(email, password); // Llamamos al método de DataAccess para comprobar el login
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@WebMethod
+	public List<Date> getThisMonthDatesWithRides(String from, String to, Date date) {
+		dbManager.open();
+		List<Date> dates = dbManager.getThisMonthDatesWithRides(from, to, date);
+		dbManager.close();
+		return dates;
+	}
+
+	public void close() {
+		DataAccess dB4oManager = new DataAccess();
+		dB4oManager.close();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@WebMethod
+	public void initializeBD() {
+		dbManager.open();
+		dbManager.initializeDB();
+		dbManager.close();
+	}
+}

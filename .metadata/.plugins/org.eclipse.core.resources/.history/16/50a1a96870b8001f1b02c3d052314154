@@ -1,0 +1,37 @@
+package eredua.bean;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+import java.util.List;
+import businessLogic.BLFacade;
+import businessLogic.FacadeBean;
+
+@ManagedBean(name = "userBean")
+@ViewScoped
+public class gidaribidaiBean {
+    private List<String> usernames; // Lista de nombres de usuario
+    private String selectedUsername; // Usuario seleccionado
+
+    // Constructor para cargar los datos al inicializar el bean
+    public UserBean() {
+        BLFacade facadeBL = FacadeBean.getBusinessLogic();
+        usernames = facadeBL.getAllUsernames(); // Método para obtener la lista de usuarios
+    }
+
+    // Getters y Setters
+    public List<String> getUsernames() {
+        return usernames;
+    }
+
+    public void setUsernames(List<String> usernames) {
+        this.usernames = usernames;
+    }
+
+    public String getSelectedUsername() {
+        return selectedUsername;
+    }
+
+    public void setSelectedUsername(String selectedUsername) {
+        this.selectedUsername = selectedUsername;
+    }
+}

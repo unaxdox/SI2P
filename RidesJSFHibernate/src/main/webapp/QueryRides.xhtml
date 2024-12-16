@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<f:view>
+	<h:head>
+		<title>Query Rides</title>
+	</h:head>
+	<h:body>
+		<h:form>
+			<h1>Query Rides</h1>
+			<table>
+				<tr>
+					<td><h:outputLabel value="Origen:" for="origin" /></td>
+					<td><h:selectOneMenu id="origin"
+							value="#{queryBean.selectedOrigin}">
+							<f:selectItem itemLabel="Select origin" />
+							<f:selectItems value="#{queryBean.origins}" />
+							<f:ajax execute="@this" render="destination rideDate ridesTable" />
+						</h:selectOneMenu></td>
+				</tr>
+
+				<tr>
+					<td><h:outputLabel value="Destino:" for="destination" /></td>
+					<td><h:selectOneMenu id="destination"
+							value="#{queryBean.selectedDestination}">
+							<f:selectItem itemLabel="Select destination" itemValue="" />
+							<f:selectItems value="#{queryBean.destinations}" />
+							<f:ajax execute="@this" render="rideDate ridesTable" />
+						</h:selectOneMenu></td>
+				</tr>
+				<tr>
+					<td><h:outputLabel value="Fecha:" for="rideDate" /></td>
+					<td><p:calendar id="rideDate"
+							value="#{queryBean.selectedDate}" navigator="true" mode="inline"
+							widgetVar="rideCalendar">
+							<p:ajax event="dateSelect" update="ridesTable" />
+						</p:calendar></td>
+				</tr>
+
+
+			</table>
+
+			<!-- Tabla con los viajes disponibles -->
+			<h:dataTable id="ridesTable" value="#{queryBean.rides}" var="ride"
+				border="1">
+				<!-- Columna: Nombre del conductor -->
+				<h:column>
+					<f:facet name="header">Conductor</f:facet>
+					<h:outputText value="#{ride.driver.username}" />
+				</h:column>
+
+				<!-- Columna: Sitios disponibles -->
+				<h:column>
+					<f:facet name="header">Sitios</f:facet>
+					<h:outputText value="#{ride.nPlaces}" />
+				</h:column>
+
+				<!-- Columna: Precio -->
+				<h:column>
+					<f:facet name="header">Precio</f:facet>
+					<h:outputText value="#{ride.price}" />
+				</h:column>
+			</h:dataTable>
+
+			<!-- Botón para cerrar -->
+			<p>
+				<h:commandButton value="Exit" action="#{queryBean.index}" />
+			</p>
+		</h:form>
+
+	</h:body>
+</f:view>
+</html>

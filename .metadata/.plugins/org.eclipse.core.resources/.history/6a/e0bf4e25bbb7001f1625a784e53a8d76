@@ -1,0 +1,43 @@
+package eredua.bean;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import businessLogic.BLFacade;
+import businessLogic.FacadeBean;
+
+@ManagedBean(name = "loginBean")
+@SessionScoped
+public class LoginBean {
+
+	private String email;
+	private String password;
+	private BLFacade facadeBL;
+
+	public LoginBean() {
+		facadeBL = FacadeBean.getBusinessLogic();
+	}
+
+	public String login() {
+		if (facadeBL.isLoginValid(email, password)) {
+			return "driver.xhtml";
+		} else {
+			return "login.xhtml";
+		}
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+}

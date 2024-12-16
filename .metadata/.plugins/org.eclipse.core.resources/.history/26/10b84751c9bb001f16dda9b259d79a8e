@@ -1,0 +1,143 @@
+package businessLogic;
+
+import java.util.Date;
+import java.util.List;
+
+import javax.jws.WebMethod;
+import javax.jws.WebService;
+
+import dataAccess.DataAccess;
+import domain.Ride;
+import domain.Driver;
+import domain.Traveler;
+import exceptions.RideAlreadyExistException;
+import exceptions.RideMustBeLaterThanTodayException;
+
+/**
+ * Implements the business logic as a web service.
+ */
+@WebService(endpointInterface = "businessLogic.BLFacade")
+public class BLFacadeImplementation implements BLFacade {
+
+	private DataAccess dbManager;
+
+	public BLFacadeImplementation() {
+		dbManager = new DataAccess();
+	}
+
+	public BLFacadeImplementation(DataAccess dbManager) {
+		this.dbManager = dbManager;
+	}
+
+	@WebMethod
+	public List<String> getDepartCities() {
+		dbManager.open();
+		List<String> cities = dbManager.getDepartCities();
+		dbManager.close();
+		return cities;
+	}
+
+	@WebMethod
+	public List<String> getDestinationCities(String from) {
+		dbManager.open();
+		List<String> destinations = dbManager.getArrivalCities(from);
+		dbManager.close();
+		return destinations;
+	}
+
+	@WebMethod
+	public Ride createRide(String from, String to, Date date, int nPlaces, float price, String driverEmail)
+			throws RideAlreadyExistException, RideMustBeLaterThanTodayException {
+		dbManager.open();
+		try {
+			return dbManager.createRide(from, to, date, nPlaces, price, driverEmail);
+		} finally {
+			dbManager.close();
+		}
+	}
+
+	@WebMethod
+	public List<Ride> getRides(String from, String to, Date date) {
+		dbManager.open();
+		List<Ride> rides = dbManager.getRides(from, to, date);
+		dbManager.close();
+		return rides;
+	}
+
+	@WebMethod
+	public List<Date> getThisMonthDatesWithRides(String from, String to, Date date) {
+		dbManager.open();
+		List<Date> dates = dbManager.getThisMonthDatesWithRides(from, to, date);
+		dbManager.close();
+		return dates;
+	}
+
+	@WebMethod
+	public boolean isLoginValid(String username, String password) {
+		dbManager.open();
+		try {
+			return dbManager.isRegistered(username, password);
+		} finally {
+			dbManager.close();
+		}
+	}
+
+	@WebMethod
+	public Driver getDriver(String username) {
+		dbManager.open();
+		try {
+			return dbManager.getDriver(username);
+		} finally {
+			dbManager.close();
+		}
+	}
+
+	@WebMethod
+	public Traveler getTraveler(String username) {
+		dbManager.open();
+		try {
+			return dbManager.getTraveler(username);
+		} finally {
+			dbManager.close();
+		}
+	}
+
+	@WebMethod
+	public boolean addDriver(String username, String password) {
+		dbManager.open();
+		try {
+			return dbManager.addDriver(username, password);
+		} finally {
+			dbManager.close();
+		}
+	}
+
+	@WebMethod
+	public boolean addTraveler(String username, String password) {
+		dbManager.open();
+		try {
+			return dbManager.addTraveler(username, password);
+		} finally {
+			dbManager.close();
+		}
+	}
+
+	@WebMethod
+	public String getMotabyUsername(String username) {
+		dbManager.open(); // Asegura que el EntityManager esté abierto
+		try {
+			return dbManager.getMotabyUsername(username); // Llama al método en DataAccess
+		} finally {
+			dbManager.close(); // Asegura que se cierre después de la operación
+		}
+	}
+
+	@WebMethod
+	public List<User> getAllUsernames() {
+		dbManager.open(); // Abre la conexión a la base de datos
+		List<String> usernames = dbManager.getAllUsernames(); // Llama al método del DataAccess
+		dbManager.close(); // Cierra la conexión a la base de datos
+		return usernames;
+	}
+
+}

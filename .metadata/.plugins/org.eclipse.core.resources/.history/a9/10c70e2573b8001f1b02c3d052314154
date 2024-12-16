@@ -1,0 +1,44 @@
+package eredua.bean;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+import java.util.List;
+import businessLogic.BLFacade;
+import businessLogic.FacadeBean;
+
+@ManagedBean(name = "gidaribidaiBean")
+@ViewScoped
+public class gidaribidaiBean implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+	private String selectedUsername;
+	private List<String> usernames;
+	private BLFacade facadeBL;
+
+	public gidaribidaiBean() {
+		facadeBL = FacadeBean.getBusinessLogic();
+		loadUsernames();
+	}
+
+	public void loadUsernames() {
+		usernames = facadeBL.getUsernames();
+	}
+
+	// Getters y setters
+	public String getSelectedUsername() {
+		return selectedUsername;
+	}
+
+	public void setSelectedUsername(String selectedUsername) {
+		this.selectedUsername = selectedUsername;
+	}
+
+	public List<String> getUsernames() {
+		return usernames;
+	}
+
+	public void setUsernames(List<String> usernames) {
+		this.usernames = usernames;
+	}
+}

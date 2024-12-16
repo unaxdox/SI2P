@@ -1,0 +1,46 @@
+package eredua.bean;
+
+import javax.annotation.PostConstruct;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import java.util.List;
+
+import businessLogic.BLFacade;
+import businessLogic.FacadeBean;
+
+@ManagedBean(name = "gidaribidai")
+@SessionScoped
+public class gidaribidaiBean {
+
+	private List<String> usernames; // Lista de todos los nombres de usuario
+	private String selectedUsername; // Nombre de usuario seleccionado
+
+	// Carga todos los nombres de usuario al iniciar el bean
+	public void loadUsernames() {
+		BLFacade facadeBL = FacadeBean.getBusinessLogic();
+		usernames = facadeBL.getAllUsernames();
+	}
+
+	// Getters y setters
+	public List<String> getUsernames() {
+		return usernames;
+	}
+
+	public void setUsernames(List<String> usernames) {
+		this.usernames = usernames;
+	}
+
+	public String getSelectedUsername() {
+		return selectedUsername;
+	}
+
+	public void setSelectedUsername(String selectedUsername) {
+		this.selectedUsername = selectedUsername;
+	}
+
+	// Acción de ejemplo al seleccionar un usuario
+	public String onSelectUser() {
+		System.out.println("Usuario seleccionado: " + selectedUsername);
+		return "somePage.xhtml"; // Redirige a una página si es necesario
+	}
+}

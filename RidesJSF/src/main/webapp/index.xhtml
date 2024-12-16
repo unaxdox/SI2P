@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<f:view>
+	<h:head>
+		<title>Index</title>
+	</h:head>
+	<h:body>
+		<h1>Welcome to Rides</h1>
+		<h:form>
+			<table>
+				<tr>
+					<td><h:commandButton value="Login"
+							action="#{indexBean.goToLogin}" /></td>
+					<td><h:commandButton value="Register"
+							action="#{indexBean.goToRegister}" /></td>
+				</tr>
+				<tr>
+					<td><h:commandButton
+							value="GIDARI BATEN BIDAI GUZTIAK ERAKUTSI"
+							action="#{indexBean.gidaribidai}" /></td>
+				</tr>
+			</table>
+
+		</h:form>
+	</h:body>
+</f:view>
+</html>

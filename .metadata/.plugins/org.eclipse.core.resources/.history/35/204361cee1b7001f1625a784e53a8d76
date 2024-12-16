@@ -1,0 +1,80 @@
+package eredua.bean;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
+
+import businessLogic.BLFacade;
+import businessLogic.FacadeBean;
+
+@ManagedBean(name = "registerBean")
+@SessionScoped
+public class RegisterBean {
+
+	private String name;
+	private String email;
+	private String password;
+	private String confirmPassword;
+	private String userType; // Driver or Traveler
+
+	// Getters y setters
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
+	}
+
+	public String getUserType() {
+		return userType;
+	}
+
+	public void setUserType(String userType) {
+		this.userType = userType;
+	}
+
+	public String reg() {
+		BLFacade facadeBL = FacadeBean.getBusinessLogic();
+		if (!password.equals(confirmPassword)) {
+			return "register.xhtml";
+		}
+
+		if (userType.equals("Driver")) {
+			if (!facadeBL.addDriver(email, password)) {
+				return "register.xhtml"; 
+			}
+			return "driver.xhtml"; // Redirige al driver.xhtml si es Driver
+		} else if ("Traveler".equalsIgnoreCase(userType)) {
+			if (!facadeBL.addTraveler(email, password)) {
+				return "register.xhtml"; // Error al registrar
+			}
+			return "traveler.xhtml"; // Redirige al traveler.xhtml si es Traveler
+		}
+		return "index.xhtml"; // En caso de error
+	}
+}

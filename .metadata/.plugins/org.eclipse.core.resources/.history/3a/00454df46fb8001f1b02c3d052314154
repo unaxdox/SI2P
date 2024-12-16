@@ -1,0 +1,55 @@
+package businessLogic;
+
+import java.util.Date;
+import java.util.List;
+
+import javax.jws.WebMethod;
+import javax.jws.WebService;
+
+import domain.Ride;
+import domain.Driver;
+import domain.Traveler;
+import exceptions.RideAlreadyExistException;
+import exceptions.RideMustBeLaterThanTodayException;
+
+/**
+ * Interface that specifies the business logic.
+ */
+@WebService
+public interface BLFacade {
+
+    @WebMethod
+    List<String> getDepartCities();
+
+    @WebMethod
+    List<String> getDestinationCities(String from);
+
+    @WebMethod
+    Ride createRide(String from, String to, Date date, int nPlaces, float price, String driverEmail)
+            throws RideAlreadyExistException, RideMustBeLaterThanTodayException;
+
+    @WebMethod
+    List<Ride> getRides(String from, String to, Date date);
+
+    @WebMethod
+    List<Date> getThisMonthDatesWithRides(String from, String to, Date date);
+
+    @WebMethod
+    boolean isLoginValid(String username, String password);
+
+    @WebMethod
+    Driver getDriver(String username);
+
+    @WebMethod
+    Traveler getTraveler(String username);
+
+    @WebMethod
+    boolean addDriver(String username, String password);
+
+    @WebMethod
+    boolean addTraveler(String username, String password);
+    
+    @WebMethod
+    public String getMotabyUsername(String username);
+
+}

@@ -1,0 +1,5 @@
+INDEX VERSION 1.4+C:\Users\34688\Desktop\UNI\3.II\1.kuatri\SI2\2.zatia\proiektua\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+1945654770.index
+2292911504.index
+2292911504.index
+3009086310.index

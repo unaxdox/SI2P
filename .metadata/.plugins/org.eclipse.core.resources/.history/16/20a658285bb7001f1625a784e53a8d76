@@ -1,0 +1,49 @@
+package eredua.bean;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import dataAccess.DataAccess;
+import businessLogic.FacadeBean;
+import businessLogic.BLFacade;
+
+@ManagedBean(name = "registerBean")
+@SessionScoped
+public class RegisterBean {
+
+	private String email;
+	private String name;
+	private String password;
+	private String confirmPassword;
+	private boolean isDriver;
+	private BLFacade facadeBL;
+
+	public RegisterBean() {
+		facadeBL = FacadeBean.getBusinessLogic(); // Obtener la instancia de BLFacade
+	}
+
+	public String register() {
+		// Verifica si las contraseñas coinciden
+		if (!password.equals(confirmPassword)) {
+			// Manejo de error: las contraseñas no coinciden
+			return "register"; // Regresar a la misma página
+		}
+
+		// Verifica si el usuario es un Driver o Traveler
+		boolean success = false;
+		if (isDriver) {
+			success = facadeBL.createDriver(email, name, password);
+		} else {
+			success = facadeBL.createTraveler(email, name, password);
+		}
+
+		if (success) {
+			// Redirige al login después de registrarse
+			return "login.xhtml"; // Página de login
+		} else {
+			// Si el registro falló (por ejemplo, email ya existe)
+			return "register"; // Regresar a la página de registro
+		}
+	}
+
+	// Getters y setters
+}

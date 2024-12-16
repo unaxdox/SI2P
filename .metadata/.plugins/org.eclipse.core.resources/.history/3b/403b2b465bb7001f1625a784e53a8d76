@@ -1,0 +1,82 @@
+package eredua.bean;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import businessLogic.FacadeBean;
+import businessLogic.BLFacade;
+import dataAccess.DataAccess;
+
+@ManagedBean(name = "registerBean")
+@SessionScoped
+public class RegisterBean {
+
+	private String email;
+	private String name;
+	private String password;
+	private String confirmPassword;
+	private boolean isDriver;
+	private BLFacade facadeBL;
+
+	public RegisterBean() {
+		facadeBL = FacadeBean.getBusinessLogic();
+	}
+
+	public String register() {
+		if (!password.equals(confirmPassword)) {
+			return "register";
+		}
+
+		boolean success = false;
+		if (isDriver) {
+			success = facadeBL.createDriver(email, name, password);
+		} else {
+			success = facadeBL.createTraveler(email, name, password);
+		}
+
+		if (success) {
+			return "login.xhtml";
+		} else {
+			return "register";
+		}
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
+	}
+
+	public boolean isDriver() {
+		return isDriver;
+	}
+
+	public void setDriver(boolean isDriver) {
+		this.isDriver = isDriver;
+	}
+}

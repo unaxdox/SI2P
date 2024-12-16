@@ -1,0 +1,36 @@
+package eredua.bean;
+
+import java.util.List;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+
+@ManagedBean(name = "gidaribidai")
+@SessionScoped
+public class gidaribidaiBean {
+	private String selectedUsername;
+	private List<String> usernames;
+
+	// Getters y Setters
+	public String getSelectedUsername() {
+		return selectedUsername;
+	}
+
+	public void setSelectedUsername(String selectedUsername) {
+		this.selectedUsername = selectedUsername;
+	}
+
+	public List<String> getUsernames() {
+		return usernames;
+	}
+
+	public void setUsernames(List<String> usernames) {
+		this.usernames = usernames;
+	}
+
+	// Método de ejemplo para manejar la selección
+	public String onSelectUser() {
+		System.out.println("User selected: " + selectedUsername);
+		return "someNextPage.xhtml"; // Redirige a la siguiente página
+	}
+}

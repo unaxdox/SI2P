@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<f:view>
+	<h:head>
+		<title>Create Ride</title>
+	</h:head>
+	<h:body>
+		<h:form>
+			<h1>Create Ride</h1>
+			<table>
+				<tr>
+					<td><h:outputLabel value="Depart City:" for="departCity" /></td>
+					<td><h:inputText id="departCity" value="#{create.departCity}" /></td>
+				</tr>
+				<tr>
+					<td><h:outputLabel value="Arrival City:" for="arrivalCity" /></td>
+					<td><h:inputText id="arrivalCity"
+							value="#{create.arrivalCity}" /></td>
+				</tr>
+				<tr>
+					<td><h:outputLabel value="Number of Seats:" for="seats" /></td>
+					<td><h:inputText id="seats" value="#{create.seats}" /></td>
+				</tr>
+				<tr>
+					<td><h:outputLabel value="Price:" for="price" /></td>
+					<td><h:inputText id="price" value="#{create.price}" /></td>
+				</tr>
+				<tr>
+					<td>Data (PrimeFaces-ekin):</td>
+					<td><p:calendar id="data" value="#{create.data}"
+							navigator="false" mode="inline" /></td>
+				</tr>
+			</table>
+			<p>
+				<h:commandButton value="Create Ride" action="#{create.create}" />
+				<h:commandButton value="Close" action="#{create.index}" />
+			</p>
+		</h:form>
+
+	</h:body>
+</f:view>
+</html>

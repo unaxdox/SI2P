@@ -1,0 +1,83 @@
+package eredua.bean;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+import businessLogic.BLFacade;
+import businessLogic.FacadeBean;
+
+@ManagedBean(name = "registerBean")
+@RequestScoped
+public class RegisterBean {
+	private String email;
+	private String name;
+	private String password;
+	private String confirmPassword;
+	private String userType; // Driver or Traveler
+	private BLFacade facadeBL;
+
+	public RegisterBean() {
+		facadeBL = FacadeBean.getBusinessLogic();
+	}
+
+	public String reg() {
+		if (!password.equals(confirmPassword)) {
+			return "register.xhtml"; // Si las contraseñas no coinciden, permanece en la misma página
+		}
+
+		if ("Driver".equalsIgnoreCase(userType)) {
+			if (!facadeBL.addDriver(email, password)) {
+				return "register.xhtml"; // Error al registrar el Driver
+			}
+			return "driver.xhtml"; // Redirige a la página de Driver después de registrarlo
+		} else if ("Traveler".equalsIgnoreCase(userType)) {
+			if (!facadeBL.addTraveler(email, password)) {
+				return "register.xhtml"; // Error al registrar el Traveler
+			}
+			return "traveler.xhtml"; // Redirige a la página de Traveler después de registrarlo
+		}
+
+		return "index.xhtml"; // Si algo sale mal, redirige a la página principal
+	}
+
+	// **Getters y Setters**
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
+	}
+
+	public String getUserType() {
+		return userType;
+	}
+
+	public void setUserType(String userType) {
+		this.userType = userType;
+	}
+}

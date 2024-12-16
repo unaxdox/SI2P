@@ -1,0 +1,34 @@
+package eredua.bean;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import dataAccess.DataAccess;
+
+@ManagedBean(name = "loginBean")
+@SessionScoped
+public class LoginBean {
+
+	private String email;
+	private String password;
+
+	private DataAccess dataAccess;
+
+	public LoginBean() {
+		dataAccess = new DataAccess(); // Inicializar DataAccess
+	}
+
+	public String login() {
+		// Verifica si el email y la contraseña son válidos
+		boolean isValid = dataAccess.isLoginValid(email, password);
+
+		if (isValid) {
+			// Si es un Driver, redirigir a la página de Driver
+			return "driver.xhtml"; // Redirigir a la página correspondiente
+		} else {
+			// Si es un Traveler, redirigir a la página de Traveler
+			return "traveler.xhtml"; // Redirigir a la página correspondiente
+		}
+	}
+
+	// Getters y setters
+}

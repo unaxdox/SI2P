@@ -1,0 +1,18 @@
+package eredua.bean;
+
+import javax.faces.bean.ManagedBean;
+
+@ManagedBean(name = "index")
+
+public class index {
+
+	public String login() {
+        return "login";
+    }
+	
+	public String register() {
+        return "register";
+    }
+	
+
+}

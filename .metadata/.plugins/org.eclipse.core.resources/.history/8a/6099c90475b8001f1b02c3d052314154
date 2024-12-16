@@ -1,0 +1,37 @@
+package eredua.bean;
+
+import java.util.List;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+
+@ManagedBean(name = "gidaribidaiBean")
+@SessionScoped
+public class gidaribidaiBean {
+
+	private String selectedUsername;
+	private List<Driver> drivers;
+
+	// Método para cargar la lista de conductores (esto debe venir de tu lógica de
+	// negocio)
+	public void loadDrivers() {
+		// Esto debería cargar la lista de conductores desde el backend o base de datos
+		this.drivers = facadeBL.getAllDrivers();
+	}
+
+	// Getters y setters
+	public String getSelectedUsername() {
+		return selectedUsername;
+	}
+
+	public void setSelectedUsername(String selectedUsername) {
+		this.selectedUsername = selectedUsername;
+	}
+
+	public List<Driver> getDrivers() {
+		return drivers;
+	}
+
+	public void setDrivers(List<Driver> drivers) {
+		this.drivers = drivers;
+	}
+}

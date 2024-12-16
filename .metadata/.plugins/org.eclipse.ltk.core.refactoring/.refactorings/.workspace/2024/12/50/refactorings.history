@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;RidesHibernate&apos; to &apos;RidesJSFHibernate&apos;" description="Rename resource &apos;RidesHibernate&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="/RidesHibernate" name="RidesJSFHibernate" stamp="1733990902934" updateReferences="true"/>
+</session>

@@ -1,0 +1,31 @@
+package eredua.bean;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+
+@ManagedBean(name = "loginBean")
+@SessionScoped
+public class LoginBean {
+
+	private String email;
+	private String password;
+
+	public LoginBean() {
+		// Constructor vacío
+	}
+
+	/**
+	 * Método para hacer login del usuario.
+	 * 
+	 * @return La página a la que se debe redirigir según el tipo de usuario.
+	 */
+	public String login() {
+		// Verifica si el usuario es un driver o traveler y redirige
+		// Aquí iría la lógica para verificar si el email y la contraseña son correctos
+
+		// Si el login es exitoso:
+		return "driver.xhtml"; // O "traveler.xhtml" dependiendo del tipo de usuario
+	}
+
+	// Getters y setters
+}

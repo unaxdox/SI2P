@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<f:view>
+	<h:head>
+		<title>Bidaiak - #{gidaribidaiBean.selectedUsername}</title>
+	</h:head>
+	<h:body>
+		<h:form>
+			<!-- Título -->
+			<h:outputText value="Bidaiak: #{gidaribidaiBean.selectedUsername}" />
+
+			<!-- Tabla de viajes -->
+			<h:dataTable id="ridesTable" value="#{gidaribidaiBean.driverRides}"
+				var="ride" border="1">
+				<!-- Columna: Nombre del conductor -->
+				<h:column>
+					<f:facet name="header">Conductor</f:facet>
+					<h:outputText value="#{ride.driver.username}" />
+				</h:column>
+
+				<!-- Columna: Sitios disponibles -->
+				<h:column>
+					<f:facet name="header">Nondik</f:facet>
+					<h:outputText value="#{ride.from}" />
+				</h:column>
+
+				<!-- Columna: Precio -->
+				<h:column>
+					<f:facet name="header">Nora</f:facet>
+					<h:outputText value="#{ride.to}" />
+				</h:column>
+			</h:dataTable>
+		</h:form>
+	</h:body>
+</f:view>
+</html>
